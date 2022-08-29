@@ -50,7 +50,20 @@ async function create(req, res, next){
     res.status(201).json({data});
 }
 
+//had validity checks for update
+
+/*async function eventExists(req, res, next){
+
+  }*/
+
+async function update(req, res, next){
+    const updatedEvent = req.body.data;
+    const data = await eventsService.update(updatedEvent);
+    res.status(200).json({data});
+}
+
 module.exports = {
     list: asyncErrorBoundary(list),
-    create: [bodyHasProperty("event_name"), bodyHasProperty("start_date"), futureEvent, validEndDate, asyncErrorBoundary(create)]
+    create: [bodyHasProperty("event_name"), bodyHasProperty("start_date"), futureEvent, validEndDate, asyncErrorBoundary(create)],
+    update
 }
