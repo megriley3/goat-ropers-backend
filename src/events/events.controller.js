@@ -50,7 +50,7 @@ async function create(req, res, next){
     res.status(201).json({data});
 }
 
-//had validity checks for update
+//had validity checks for update and delete
 
 /*async function eventExists(req, res, next){
 
@@ -62,8 +62,15 @@ async function update(req, res, next){
     res.status(200).json({data});
 }
 
+async function deleteEvent(req, res, next){
+    const eventId = req.body.data;
+    await eventsService.delete(eventId);
+    res.sendStatus(204)
+}
+
 module.exports = {
     list: asyncErrorBoundary(list),
     create: [bodyHasProperty("event_name"), bodyHasProperty("start_date"), futureEvent, validEndDate, asyncErrorBoundary(create)],
-    update
+    update: asyncErrorBoundary(update),
+    delete: asyncErrorBoundary(deleteEvent)
 }

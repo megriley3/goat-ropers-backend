@@ -15,8 +15,14 @@ function update(updatedEvent){
         .update(updatedEvent, "*")
         .then((event) => event[0])
 }
+
+function destroy(eventId){
+    return knex("events").where({event_id: eventId}).del();
+}
+
 module.exports = {
     list,
     create,
-    update
+    update,
+    delete: destroy
 }
