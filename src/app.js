@@ -7,12 +7,14 @@ const cors = require("cors");
 const eventsRouter = require("./events/events.router");
 const errorHandler = require("./errors/errorHandler");
 const notFound = require("./errors/notFound");
+const tournamentsRouter = require("./tournaments/tournaments.router")
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/events", eventsRouter)
+app.use("/events", eventsRouter);
+app.use("/tournaments", tournamentsRouter);
 app.use(notFound);
 app.use(errorHandler);
 
